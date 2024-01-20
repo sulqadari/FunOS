@@ -54,9 +54,9 @@ compile time which share a join address space.
 These functions represent a unified approach - a single data structure and a
 single set of nodes used by all levels of the OS to maintain lists of processes.
 There is a six types of lists of processes:
-	 - waiting
-	 - sleeping
-	 -
+	 - suspended
+	 - IO waiting
+	 - ready (descending order)
 
 A process manager handles objects called "processes".It moves a process from one list
 to another very frequently doing it by means of storing its ID in the list. All that
@@ -90,3 +90,49 @@ NPROC - 1 each correspond to one process, and the ones beyond that ranges design
 heads and tails of the lists. The maximum number of lists are each known at compile
 time and a process can only appear on one list at a given time.
 
+
+					5 Scheduling and context switching
+Context switching consists of:
+	- stop current process;
+	- save enough info (to be able to restart from);
+	- choose another process to run;
+	- relinquish control to the new process;
+
+Process Table - a structure that keeps all info about processes. Only one entry
+				in the table corresponds to an active process at the given moment.
+				This table has fixed size.
+
+Scheduler - an entity that implements the policy for selecing a process among those
+			that are eligible to use the processor. At any time, the highest 
+			priority eligible process is executing. Among processes with equal
+			priority, scheduling is round-robin.
+
+The scheduler is merely a function the current process calls to pass over processor
+to another one.
+If the current process shouldn't remain ready, before calling scheduler its 'state'
+field must be set to the desired next state.
+The function reschedule() treats the READY list both as priority queue, when
+inserts the current process into it, and as FIFO list when fetches the next process
+with the highest priority.
+
+Deferred rescheduling is provided for situations where the OS must make multiple
+processes eligible to use the processor before allowing any to run. Consider example
+when two or more processes with the highest priority are waiting for a timer. When
+timer expires, the current process will pass processor over to the first one he
+have fetched from the PR_RECTIM list, which in turn proceed to performing its
+computation immediately, leaving the second one on the PR_RECTIM list waiting for
+it. The worst case might be when the second process had higher priority.
+To avoid such a situation, deferred rescheduling guarantees that no
+one acquire processor until after all processes that asked for deferring, canceled
+their requiest.
+
+At any point in time at least one process must execute. To maintain this invariant
+Xinu holds an extra process, called the 'NULL PROCESS' when the system boots. The
+scheduler switches to the null process only when no other process is ready to run.
+
+The most frequent operations are removing a process from the READY list and moving
+the current one onto that list. Many other functions need to make a process eligible
+for processor service. This frequent task is performed by function sched_ready().
+
+
+					6 More process management

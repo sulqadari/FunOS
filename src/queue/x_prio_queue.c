@@ -1,7 +1,11 @@
 #include "x_queue.h"
 
+/**
+ * Inserts a process into priority queue, which can
+ * be, for example the "ready list" of processes.
+*/
 Status
-insert(i32 pID, i16 qID, i32 key)
+prio_insert(i32 pID, i16 qID, i32 key)
 {
 	i16 curr, prev;
 

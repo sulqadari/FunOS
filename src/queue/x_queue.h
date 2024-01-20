@@ -44,6 +44,9 @@ extern Node queueTable[];
 #define IS_BAD_QID(idx) \
 	((idx < 0) || (idx >= NODE_TOTAL))
 
+i32 fifo_enqueue(i32 pID, i16 qID);
+i32 fifo_dequeue(i16 qID);
 
+Status prio_insert(i32 pID, i16 qID, i32 key);
 
 #endif // !X_QUEUE_H
