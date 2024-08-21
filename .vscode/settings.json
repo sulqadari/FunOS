@@ -1,0 +1,8 @@
+{
+	"files.associations": {
+		"*.jcsh": "shellscript",
+		"random": "c",
+		"stdint.h": "c",
+		"cstdlib": "c"
+	}
+}
