@@ -1,8 +1,13 @@
 {
 	"files.associations": {
+		"*.fn": "java",
+		"00_Preface": "markdown",
+		"*.tivm": "javascript",
+		"*.txt": "cmake",
 		"*.jcsh": "shellscript",
 		"random": "c",
 		"stdint.h": "c",
-		"cstdlib": "c"
+		"cstdlib": "c",
+		"stdbool.h": "c"
 	}
 }

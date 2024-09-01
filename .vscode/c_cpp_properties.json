@@ -1,9 +1,11 @@
 {
     "configurations": [
         {
-            "name": "FunOS simulator",
+            "name": "FunOS",
             "includePath": [
-                "${workspaceFolder}/include"
+                "${workspaceFolder}/HAL",
+				"${workspaceFolder}/src/GP",
+				"${workspaceFolder}/src/ISO7816"
             ],
             "defines": [],
             "compilerPath": "/usr/bin/gcc",
