@@ -1,40 +1,57 @@
 #include <stdbool.h>
+#include <stdint.h>
 #include "APDU.h"
+#include "StatusWords.h"
+#include "WS/ws_wraper.h"
 
 // Fast-forward declaration
-static void receiveCmd(void);
-static void receiveData(void);
-static void sendData(uint8_t*, uint32_t);
-static void sendSW(uint16_t);
+static void receiveCmd(Interface iface);
+static void receiveData(Interface iface);
+static void sendData(Interface iface, uint8_t* data, uint32_t length);
+static void sendSW(uint16_t sw);
 static void process(void);
 
-static uint8_t ifaceType = 0;
+static APDU_t* apdu;
+
 void
 apdu_init(APDU_t* apdu)
 {
-	apdu->recvCmd	= &receiveCmd;
-	apdu->recvData	= &receiveData;
-	apdu->sendData	= &sendData;
-	apdu->sendSW	= &sendSW;
-	apdu->process	= &process;
+	apdu->recvCmd	 = &receiveCmd;
+	apdu->recvData	 = &receiveData;
+	apdu->sendData	 = &sendData;
+	apdu->sendSW	 = &sendSW;
+	apdu->process	 = &process;
+	apdu->sendLength = 0;
+	apdu->sendOffset = 0;
+	apdu->iface		 = iface_websocket;
+	apdu->SW		 = SW_NO_ERROR;
 }
 
 static void
-receiveCmd(void)
+receiveCmd(Interface iface)
 {
-	udp_recvCmd();
+	switch (iface) {
+		case iface_websocket: ws_recvCmd(); break;
+		default:
+	}
 }
 
 void static
-receiveData(void)
+receiveData(Interface iface)
 {
-
+	switch (iface) {
+		case iface_websocket: ws_recvData(); break;
+		default:
+	}
 }
 
 void static
-sendData(uint8_t*, uint32_t)
+sendData(Interface iface, uint8_t* data, uint32_t length)
 {
-
+	switch (iface) {
+		case iface_websocket: ws_sendData(data, length); break;
+		default:
+	}
 }
 
 void static

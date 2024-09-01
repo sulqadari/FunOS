@@ -8,6 +8,11 @@
 		"random": "c",
 		"stdint.h": "c",
 		"cstdlib": "c",
-		"stdbool.h": "c"
+		"stdbool.h": "c",
+		"wic.h": "c",
+		"transport.h": "c",
+		"wic_utils.h": "c",
+		"apdu.h": "c",
+		"ws_wraper.h": "c"
 	}
 }

@@ -4,10 +4,12 @@
             "name": "FunOS",
             "includePath": [
                 "${workspaceFolder}/HAL",
-				"${workspaceFolder}/src/GP",
-				"${workspaceFolder}/src/ISO7816"
+				"${workspaceFolder}/GP",
+				"${workspaceFolder}/ISO7816"
             ],
-            "defines": [],
+            "defines": [
+				"FUNOS_SIMULATOR"
+			],
             "compilerPath": "/usr/bin/gcc",
             "cStandard": "c17",
             "cppStandard": "gnu++17",
