@@ -1,8 +1,8 @@
 #include <stdio.h>
 #include <stdint.h>
 #include <stdbool.h>
-#include "APDU.h"
-#include "WS/ws_wraper.h"
+#include "apdu.h"
+#include "ws_wraper.h"
 
 int
 main(int argc, char* argv[])
@@ -21,8 +21,8 @@ main(int argc, char* argv[])
 		apdu.recvCmd(apdu.iface);
 		apdu.recvData(apdu.iface);
 		apdu.process();
-		apdu.sendData(temp, length);
-		apdu.sendSW(0x9000);
+		apdu.sendData(apdu.iface, temp, length);
+		apdu.sendSW(apdu.iface, apdu.SW);
 	}
 	return (0);
 }

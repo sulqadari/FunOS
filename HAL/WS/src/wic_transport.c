@@ -19,7 +19,7 @@
  *
  * */
 
-#include "transport.h"
+#include "wic_transport.h"
 #include "log.h"
 
 #include <sys/socket.h>
@@ -31,6 +31,7 @@
 #include <poll.h>
 #include <errno.h>
 #include <string.h>
+#include <stdbool.h>
 
 bool transport_open_client(enum wic_schema schema, const char *host, uint16_t port, int *s)
 {

@@ -3,7 +3,8 @@
         {
             "name": "FunOS",
             "includePath": [
-                "${workspaceFolder}/HAL",
+                "${workspaceFolder}/HAL/WS",
+				"${workspaceFolder}/HAL/WS/include",
 				"${workspaceFolder}/GP",
 				"${workspaceFolder}/ISO7816"
             ],

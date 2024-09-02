@@ -497,7 +497,7 @@ size_t wic_parse(struct wic_inst *self, const void *data, size_t size)
 
         if(self->http.http_errno != 0U){
 
-            WIC_ERROR(TAG, "http parser reports error: (%u %s) %s", self->http.http_errno, http_errno_name(self->http.http_errno), http_errno_description(self->http.http_errno))
+            WIC_ERROR_HTTP(TAG, "http parser reports error:", http_errno_description(self->http.http_errno));
 
             if(self->on_close_transport != NULL){
 
@@ -1971,7 +1971,7 @@ static int on_response_complete(http_parser *http)
             break;
         }
 
-        WIC_DEBUG(TAG, "expecting status code 101 but got %" PRIu16, http->status_code)
+        WIC_DEBUG_CODE(TAG, "expecting status code 101 but got", http->status_code);
         return -1;
     }
 

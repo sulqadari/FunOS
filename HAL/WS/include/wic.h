@@ -26,7 +26,7 @@ extern "C" {
 #include <stddef.h>
 
 #include "http_parser.h"
-#include "WS/wic_config.h"
+#include "wic_config.h"
 
 #ifndef WIC_DEBUG
 /** print a debug level message

@@ -1,4 +1,5 @@
-#include "WS/include/wic_utils.h"
+#include <stdint.h>
+#include "wic_utils.h"
 #include "StatusWords.h"
 
 typedef struct {

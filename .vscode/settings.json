@@ -13,6 +13,11 @@
 		"transport.h": "c",
 		"wic_utils.h": "c",
 		"apdu.h": "c",
-		"ws_wraper.h": "c"
+		"ws_wraper.h": "c",
+		"statuswords.h": "c",
+		"wic_transport.h": "c",
+		"socket.h": "c",
+		"types.h": "c",
+		"inet.h": "c"
 	}
 }

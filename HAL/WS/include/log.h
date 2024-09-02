@@ -19,47 +19,12 @@
  *
  * */
 
-#ifndef WIC_CONFIG_H
-#define WIC_CONFIG_H
+#ifndef LOG_H
+#define LOG_H
 
 #include <stdio.h>
-#include <assert.h>
 
-#define WIC_DEBUG(tag, msg)					\
-	do {									\
-		printf("%s: %u: %s: debug: ",		\
-		__FILE__, __LINE__, __FUNCTION__);	\
-		printf("%s: %s", tag, msg);			\
-		printf("\n");						\
-	} while(0);
-
-#define WIC_DEBUG_CODE(tag, msg, code)		\
-	do {									\
-		printf("%s: %u: %s: debug: ",		\
-		__FILE__, __LINE__, __FUNCTION__);	\
-		printf("%s: %s ,code: %d",			\
-		tag, msg, code);					\
-		printf("\n");						\
-	} while(0);
-
-
-#define WIC_ERROR(tag, msg)					\
-	do {									\
-		printf("%s: %u: %s: error: ",		\
-		__FILE__, __LINE__, __FUNCTION__);	\
-		printf("%s: %s", tag, msg);			\
-		printf("\n");						\
-	} while(0);
-
-#define WIC_ERROR_HTTP(tag, msg, http_err_desc)	\
-	do {									\
-		printf("%s: %u: %s: error: ",		\
-		__FILE__, __LINE__, __FUNCTION__);	\
-		printf("%s: %s: description: %s",	\
-		tag, msg, http_err_desc);			\
-		printf("\n");						\
-	} while (0)
-
-#define WIC_ASSERT(XX) assert(XX);
+#define LOG(...) do{printf("%s: ", __FILE__);printf(__VA_ARGS__);printf("\n");fflush(stdout);}while(0);
+#define ERROR(...) do{fprintf(stderr, "error: ");fprintf(stderr, __VA_ARGS__);fprintf(stderr, "\n");fflush(stderr);}while(0);
 
 #endif
