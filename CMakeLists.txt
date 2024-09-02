@@ -4,6 +4,12 @@ project(FunOS)
 set(ENTRY_POINT "FunOSemu")
 set(WEBSOCKET	"WebSocket")
 set(ISO7816		"iso7816")
+set(CMAKE_C_FLAGS "${CMAKE_C_FLAGS} -O0 -g3 -fsanitize=address -static-libasan -fno-omit-frame-pointer")
+
+add_compile_definitions(
+	FUNOS_SIMULATOR
+)
+
 add_subdirectory(HAL/WS)
 add_subdirectory(ISO7816)
 

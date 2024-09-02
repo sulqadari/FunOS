@@ -8,8 +8,6 @@ int
 main(int argc, char* argv[])
 {
 	APDU_t apdu;
-	uint8_t temp[256];
-	uint16_t length = 256;
 
 	apdu_init(&apdu);
 
@@ -18,11 +16,11 @@ main(int argc, char* argv[])
 #endif /* FUNOS_SIMULATOR */
 
 	while (true) {
-		apdu.recvCmd(apdu.iface);
-		apdu.recvData(apdu.iface);
+		apdu.recvCmd();
+		apdu.recvData();
 		apdu.process();
-		apdu.sendData(apdu.iface, temp, length);
-		apdu.sendSW(apdu.iface, apdu.SW);
+		apdu.sendData(apdu.buffer, apdu.sendLength);
+		apdu.sendSW(apdu.SW);
 	}
 	return (0);
 }

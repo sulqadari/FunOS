@@ -138,7 +138,7 @@ wic_printCommand(const uint8_t* buffer, uint16_t size)
 void
 wic_printAnswer(const uint8_t* buffer, uint16_t size)
 {
-	printf("<< ");
+	printf(">> ");
 
 	uint16_t sw = (uint16_t)(((uint16_t)buffer[size - 2] << 8) |
 				  ((uint16_t)buffer[size - 1]));

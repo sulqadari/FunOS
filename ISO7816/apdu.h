@@ -18,10 +18,10 @@ typedef enum {
 } Interface;
 typedef struct APDU_t
 {
-	void (*recvCmd)(Interface);
-	void (*recvData)(Interface);
-	void (*sendData)(Interface, uint8_t*, uint32_t);
-	void (*sendSW)(Interface, uint16_t);
+	void (*recvCmd)(void);
+	void (*recvData)(void);
+	void (*sendData)(uint8_t*, uint32_t);
+	void (*sendSW)(uint16_t);
 	void (*process)(void);
 	uint16_t sendLength;			/* The length of the data to be sent. */
 	Interface iface;					/* Interface. */
