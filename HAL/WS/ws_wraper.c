@@ -14,11 +14,15 @@
 #include "wic.h"
 #include "wic_transport.h"
 #include "wic_utils.h"
+#include "log.h"
 
 static APDU_t* apdu;
 static struct wic_inst inst;
 struct wic_init_arg arg;
 static int s;
+
+static const uint8_t ATR[] = { 0x3B, 0xFC,0x16,0x00,0x00,0x00,
+		0x73,0xC8,0x21,0x13,0x66,0x01,0x06,0x11,0x59,0x00,0x01,0x2C };
 
 void
 ws_recvCmd(void)
@@ -68,7 +72,7 @@ static bool
 on_message_handler(struct wic_inst *inst, enum wic_encoding encoding, bool fin, const char *data, uint16_t size)
 {
     if (encoding == WIC_ENCODING_UTF8) {
-        // LOG("<< %.*s", size, data);
+        LOG("<< %.*s", size, data);
     } else {
 		wic_printCommand((const void*)data, size);
 	}
@@ -79,7 +83,7 @@ on_message_handler(struct wic_inst *inst, enum wic_encoding encoding, bool fin, 
 static void
 on_handshake_failure_handler(struct wic_inst *inst, enum wic_handshake_failure reason)
 {
-    // LOG("websocket handshake failed for reason %d", reason);
+    LOG("websocket handshake failed for reason %d", reason);
 }
 
 static void
@@ -87,24 +91,23 @@ on_open_handler(struct wic_inst *inst)
 {
     const char *name, *value;
 
-    // LOG("websocket is open");
+    LOG("websocket is open");
     
-    // LOG("received handshake:");
+    LOG("received handshake:");
 
     for(value = wic_get_next_header(inst, &name); value; value = wic_get_next_header(inst, &name)){
 
-        // LOG("%s: %s", name, value);
+        LOG("%s: %s", name, value);
     }
 
-    const char msg[] = "hello world";
-
-    wic_send_text(inst, true, msg, strlen(msg));
+    wic_printAtr(ATR, sizeof(ATR));
+	wic_send_binary(inst, true, (const void *)ATR, sizeof(ATR));
 } 
 
 static void
 on_close_handler(struct wic_inst *inst, uint16_t code, const char *reason, uint16_t size)
 {
-    // LOG("websocket closed for reason %u", code);
+    LOG("websocket closed for reason %u", code);
 }
 
 static void
@@ -116,7 +119,7 @@ on_close_transport_handler(struct wic_inst *inst)
 static void
 on_send_handler(struct wic_inst *inst, const void *data, size_t size, enum wic_buffer type)
 {
-    // LOG("sending buffer type %d", type);
+    LOG("sending buffer type %d", type);
 
     transport_write(*(int *)wic_get_app(inst), data, size);
 }

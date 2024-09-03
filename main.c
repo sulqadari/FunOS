@@ -4,11 +4,11 @@
 #include "apdu.h"
 #include "ws_wraper.h"
 
+APDU_t apdu;
+
 int
 main(int argc, char* argv[])
 {
-	APDU_t apdu;
-
 	apdu_init(&apdu);
 
 #if defined(FUNOS_SIMULATOR)
