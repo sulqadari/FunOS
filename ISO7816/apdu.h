@@ -16,19 +16,20 @@
 typedef enum {
 	iface_websocket
 } Interface;
-typedef struct APDU_t
-{
-	void (*recvCmd)(void);
-	void (*recvData)(void);
-	void (*sendData)(uint8_t*, uint32_t);
-	void (*sendSW)(uint16_t);
-	void (*process)(void);
+
+typedef struct {
 	uint16_t sendLength;			/* The length of the data to be sent. */
-	Interface iface;					/* Interface. */
+	Interface iface;				/* Interface. */
 	uint16_t SW;					/* Status Word. */
 	uint8_t buffer[APDU_COMMAD_LENGTH + APDU_DATA_LENGTH];
 } APDU_t;
 
-void apdu_init(APDU_t* apdu);
+extern APDU_t apdu;
+
+void apdu_init(void);
+void apdu_receiveCmd(void);
+void apdu_receiveData(void);
+void apdu_sendData(uint8_t* data, uint32_t length);
+void apdu_sendSW(uint16_t sw);
 
 #endif /* FUNOS_APDU_H */
