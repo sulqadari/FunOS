@@ -1,11 +1,10 @@
 #include <stdbool.h>
 #include <stdint.h>
 #include "apdu.h"
-#include "StatusWords.h"
+#include "statusWords.h"
 #include "ws_wraper.h"
-#include "tags.h"
 
-APDU_t apdu;
+static APDU_t apdu;
 
 void
 apdu_receiveCmd(void)
@@ -48,5 +47,11 @@ apdu_init(void)
 {
 	apdu.sendLength	= 0;
 	apdu.iface		= iface_websocket;
-	apdu.SW		 	= SW_NO_ERROR;
+	apdu.SW		 	= SW_SUCCESS;
+}
+
+APDU_t*
+apdu_get(void)
+{
+	return &apdu;
 }

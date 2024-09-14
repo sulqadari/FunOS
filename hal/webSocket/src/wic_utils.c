@@ -1,6 +1,6 @@
 #include <stdint.h>
 #include "wic_utils.h"
-#include "StatusWords.h"
+#include "statusWords.h"
 #include "apdu.h"
 
 typedef struct {

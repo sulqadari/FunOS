@@ -1,8 +1,0 @@
-#ifndef FUNOS_STATUS_WORDS_H
-#define FUNOS_STATUS_WORDS_H
-
-#define SW_NO_ERROR		0x9000
-#define SW_BYTES_REMAIN	0x6100
-#define SW_UNKNOW		0x6F00
-
-#endif /* FUNOS_STATUS_WORDS_H */

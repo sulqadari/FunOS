@@ -18,6 +18,7 @@
 		"wic_transport.h": "c",
 		"socket.h": "c",
 		"types.h": "c",
-		"inet.h": "c"
+		"inet.h": "c",
+		"apdu_interface.h": "c"
 	}
 }

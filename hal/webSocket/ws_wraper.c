@@ -16,18 +16,10 @@
 #include "wic_utils.h"
 #include "log.h"
 
-static APDU_t* apdu;
 static struct wic_inst inst;
 struct wic_init_arg arg;
 static int s;
-
-/* Visa (Sampo Estonia, 2010) */
-static const uint8_t ATR[] = { 
-	0x3B, 0xEF, 0x00, 0x00, 0x81, 0x31, 0xFE, 0x45,
-	/* Historical bytes */
-	0x43, 0x4D, 0x42, 0x5F, 0x43, 0x6F, 0x6D, 0x53,
-	0x44, 0x41, 0x30, 0x30, 0x35, 0x31, 0x00, 0xE4
- };
+static APDU_t* apdu;
 
 void
 ws_recvCmd(void)
@@ -44,8 +36,8 @@ ws_recvCmd(void)
 void
 ws_recvData(void)
 {
-	/* Nothing to do for WS, because in contrast to T0, the ws_recvCmd()
-	 * function accepts both command header and data buffer at the same time. */
+	/* Nothing to do for WebSocket, because in contrast to T0, the ws_recvCmd()
+	 * function fetches both the command header and the data buffer at a time. */
 }
 
 void
@@ -159,7 +151,6 @@ ws_init(APDU_t* instance)
 {
 	static uint8_t rx[1000];
 	static char url[1000] = "ws://127.0.0.1:8525";
-	apdu = instance;
 
 	struct wic_header user_agent = {
 		.name = "User-Agent",
@@ -177,7 +168,8 @@ ws_init(APDU_t* instance)
 	arg.app = &s;
 	arg.url = url;
 	arg.role = WIC_ROLE_CLIENT;
-
+	apdu = instance;
+	
 	if (signal(SIGINT, interruptExecution) == SIG_ERR) {
 		err_sys("ERROR: can't catch SIGINT");
 	}

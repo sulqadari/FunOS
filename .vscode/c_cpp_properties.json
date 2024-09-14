@@ -3,10 +3,10 @@
         {
             "name": "FunOS",
             "includePath": [
-                "${workspaceFolder}/HAL/WS",
-				"${workspaceFolder}/HAL/WS/include",
-				"${workspaceFolder}/GP",
-				"${workspaceFolder}/ISO7816"
+                "${workspaceFolder}/hal/webSocket",
+				"${workspaceFolder}/hal/webSocket/include",
+				"${workspaceFolder}/globalPlatform",
+				"${workspaceFolder}/iso7816"
             ],
             "defines": [
 				"FUNOS_SIMULATOR"

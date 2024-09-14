@@ -10,16 +10,16 @@ add_compile_definitions(
 	FUNOS_SIMULATOR
 )
 
-add_subdirectory(HAL/WS)
-add_subdirectory(ISO7816)
+add_subdirectory(hal/webSocket)
+add_subdirectory(iso7816)
 
 add_executable(${ENTRY_POINT}
 	main.c
 )
 
 target_include_directories(${ENTRY_POINT}
-	PRIVATE ${PROJECT_SOURCE_DIR}/ISO7816
-	PRIVATE ${PROJECT_SOURCE_DIR}/HAL/WS
+	PRIVATE ${PROJECT_SOURCE_DIR}/iso7816
+	PRIVATE ${PROJECT_SOURCE_DIR}/hal/webSocket
 )
 
 target_link_libraries(${ENTRY_POINT}
