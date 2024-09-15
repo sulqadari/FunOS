@@ -1,13 +1,44 @@
-#ifndef FUNOS_ISD_H
-#define FUNOS_ISD_H
+#ifndef FUNOS_GP_COMMON_H
+#define FUNOS_GP_COMMON_H
 
-#include <stdint.h>
-#include "commonInfo.h"
+/* clause 5.1, "Card Life Cycle". See clause 11.1, "General Coding Rules"
+ * for details about assigned values. */
+typedef enum {
+	lcs_ready			= 0x01,		/* <! Card life cycle: ISD is ready to accept APDUs. */
+	lcs_initialized		= 0x07,		/* <! Card life cycle: initialized. */
+	lcs_secured			= 0x0F,		/* <! Card life cycle: secured. */
+	lcs_locked			= 0x7F,		/* <! Card life cycle: locked. */
+	lcs_terminated		= 0xFF		/* <! Card life cycle: terminated. */
+} CardLcs;
+
+/* clause 5.2, "Executable Load File/ Executable Module Life Cycle".
+ * See clause 11.1, "General Coding Rules" for details about assigned values. */
+typedef enum {
+	lcs_loaded			= 0x01		/* <! Executable Load File Life Cycle: loaded. */
+} ElfLcs;
+
+/* clause 5.3.1, "Application Life Cycle States". See clause 11.1, "General Coding Rules"
+ * for details about assigned values. */
+typedef enum {
+	lcs_installed		= 0x03,		/* <! Application Life Cycle: installed. */
+	lcs_selectable		= 0x07,		/* <! Application Life Cycle: selectable. */
+	lcs_personalized	= 0x0F,		/* <! Application Life Cycle: selectable. */
+	lcs_locked			= 0x83,		/* <! Application Life Cycle: locked. */
+} AppLcs;
+
+/* clause 5.3.2, "Security Domain Life Cycle States". See clause 11.1, "General Coding
+ * Rules" for details about assigned values. */
+typedef enum {
+	lcs_installed		= 0x03,		/* <! Application Life Cycle: installed. */
+	lcs_selectable		= 0x07,		/* <! Application Life Cycle: selectable. */
+	lcs_personalized	= 0x0F,		/* <! Application Life Cycle: selectable. */
+	lcs_locked			= 0x83,		/* <! Application Life Cycle: locked. */
+} IsdLcs;
 
 /**
  * GPCS, clause 6.6.1, "Privilege Definition".
  * The following enumeration defines Security Domain and Application privileges.
- * See clause 11.1.2, "Privileges Coding" for details about the values beind assigned. */
+ * See clause 11.1.2, "Privileges Coding" for values details. */
 typedef enum {
 	privSD			= 0x00000000,	/* <! The application is the Security Domain. */
 	privDAPVerify	= 0x000000C0,	/* <! Verify a DAP (clause 9.2.1). */
@@ -29,16 +60,6 @@ typedef enum {
 	privLoadFileEnc	= 0x00400000,	/* <! The SD requires that the Load File being associated to it is to be loaded ciphered (9.1.3.7). */
 	privCLActivate	= 0x00200000,	/* <! An App is capable of [de]activating on the contactless interface (Amd C, clause 7.1). */
 	privCLSelfActiv	= 0x00010000,	/* <! An App is capable of activating itself on the contactless interface without a prior request to the Application with the Contactless Activation privilege (Amd C, clause 7.2). */
-} SdPrivl_e;
+} Privilege;
 
-/*
- * GPCS, clause 7, "Security Domains"
- */
-typedef struct Sd_t {
-	SdLcs_e		lcState;
-	SdPrivl_e	privilege;
-	uint32_t	currApp;
-	Sd_t*		parent;
-} Sd_t;
-
-#endif /* FUNOS_ISD_H */
+#endif /* FUNOS_GP_COMMON_H */
