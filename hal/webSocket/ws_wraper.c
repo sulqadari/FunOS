@@ -19,10 +19,9 @@
 static struct wic_inst inst;
 struct wic_init_arg arg;
 static int s;
-static APDU_t* apdu;
 
 void
-ws_recvCmd(void)
+ws_recvCmd(APDU* apdu)
 {
 	if (!transport_recv(s, &inst)) {
 		fprintf(stderr, "ERROR: failed to receive data.\n");
@@ -41,22 +40,22 @@ ws_recvData(void)
 }
 
 void
-ws_sendData(uint8_t* data, uint16_t length)
+ws_sendData(APDU* apdu, uint8_t* data, uint16_t length)
 {
 	memcpy(apdu->buffer + apdu->sendLength, data, length);
 	apdu->sendLength += length;
 }
 
 void
-ws_sendSW(uint16_t sw)
+ws_sendSW(APDU* apdu, uint16_t sw)
 {
 	apdu->SW = sw;
 	apdu->buffer[apdu->sendLength] = apdu->SW >> 8;
 	apdu->buffer[apdu->sendLength + 1] = apdu->SW & 0xFF;
 	apdu->sendLength += 2;
 
-	wic_printAnswer((const void*)apdu->buffer, apdu->sendLength);
 	wic_send_binary(&inst, true, (const void*)apdu->buffer, apdu->sendLength);
+	wic_printAnswer((const void*)apdu->buffer, apdu->sendLength);
 
 	memset(apdu->buffer, 0x00, APDU_COMMAD_LENGTH + APDU_DATA_LENGTH);
 	apdu->sendLength = 0x00;
@@ -89,7 +88,6 @@ on_open_handler(struct wic_inst *inst)
     const char *name, *value;
 
     LOG("websocket is open");
-    
     LOG("received handshake:");
 
     for(value = wic_get_next_header(inst, &name); value; value = wic_get_next_header(inst, &name)){
@@ -117,7 +115,6 @@ static void
 on_send_handler(struct wic_inst *inst, const void *data, size_t size, enum wic_buffer type)
 {
     LOG("sending buffer type %d", type);
-
     transport_write(*(int *)wic_get_app(inst), data, size);
 }
 
@@ -127,7 +124,6 @@ on_buffer_handler(struct wic_inst *inst, size_t min_size, enum wic_buffer type, 
     static uint8_t tx[1000];
 
     *max_size = sizeof(tx);
-
     return (min_size <= sizeof(tx)) ? tx : NULL;
 }
 
@@ -147,7 +143,7 @@ interruptExecution(int num)
 }
 
 void
-ws_init(APDU_t* instance)
+ws_init(void)
 {
 	static uint8_t rx[1000];
 	static char url[1000] = "ws://127.0.0.1:8525";
@@ -157,18 +153,18 @@ ws_init(APDU_t* instance)
 		.value = "wic"
 	};
 
-	arg.rx = rx; arg.rx_max = sizeof(rx);    
-	arg.on_send = on_send_handler;
-	arg.on_buffer = on_buffer_handler;
-	arg.on_message = on_message_handler;        
-	arg.on_open = on_open_handler;        
-	arg.on_close = on_close_handler;        
-	arg.on_close_transport = on_close_transport_handler;        
-	arg.on_handshake_failure = on_handshake_failure_handler;
-	arg.app = &s;
-	arg.url = url;
-	arg.role = WIC_ROLE_CLIENT;
-	apdu = instance;
+	arg.rx						= rx;
+	arg.rx_max					= sizeof(rx);
+	arg.on_send					= on_send_handler;
+	arg.on_buffer				= on_buffer_handler;
+	arg.on_message				= on_message_handler;        
+	arg.on_open					= on_open_handler;        
+	arg.on_close				= on_close_handler;        
+	arg.on_close_transport		= on_close_transport_handler;        
+	arg.on_handshake_failure	= on_handshake_failure_handler;
+	arg.app						= &s;
+	arg.url						= url;
+	arg.role					= WIC_ROLE_CLIENT;
 	
 	if (signal(SIGINT, interruptExecution) == SIG_ERR) {
 		err_sys("ERROR: can't catch SIGINT");

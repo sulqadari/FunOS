@@ -3,10 +3,10 @@
 
 #include "apdu.h"
 
-void ws_init(APDU_t* instance);
-void ws_recvCmd(void);
+void ws_init(void);
+void ws_recvCmd(APDU* apdu);
 void ws_recvData(void);
-void ws_sendSW(uint16_t sw);
-void ws_sendData(uint8_t* data, uint16_t length);
+void ws_sendSW(APDU* apdu, uint16_t sw);
+void ws_sendData(APDU* apdu, uint8_t* data, uint16_t length);
 
 #endif /* FUNOS_WS_INTERFACE */

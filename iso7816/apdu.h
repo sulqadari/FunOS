@@ -17,12 +17,12 @@ typedef enum {
 	iface_websocket
 } Interface;
 
-typedef struct APDU_t {
+typedef struct APDU {
 	uint16_t sendLength;			/* The length of the data to be sent. */
 	Interface iface;				/* Interface. */
 	uint16_t SW;					/* Status Word. */
 	uint8_t buffer[APDU_COMMAD_LENGTH + APDU_DATA_LENGTH];
-} APDU_t;
+} APDU;
 
 /* Visa (Sampo Estonia, 2010) */
 static const uint8_t ATR[] = { 
@@ -37,6 +37,6 @@ void apdu_receiveCmd(void);
 void apdu_receiveData(void);
 void apdu_sendData(uint8_t* data, uint32_t length);
 void apdu_sendSW(uint16_t sw);
-APDU_t* apdu_get(void);
+APDU* apdu_get(void);
 
 #endif /* FUNOS_APDU_H */

@@ -22,18 +22,18 @@ typedef enum {
 typedef enum {
 	lcs_installed		= 0x03,		/* <! Application Life Cycle: installed. */
 	lcs_selectable		= 0x07,		/* <! Application Life Cycle: selectable. */
-	lcs_personalized	= 0x0F,		/* <! Application Life Cycle: selectable. */
+	lcs_personalized	= 0x0F,		/* <! Application Life Cycle: personalized. */
 	lcs_locked			= 0x83,		/* <! Application Life Cycle: locked. */
 } AppLcs;
 
 /* clause 5.3.2, "Security Domain Life Cycle States". See clause 11.1, "General Coding
  * Rules" for details about assigned values. */
 typedef enum {
-	lcs_installed		= 0x03,		/* <! Application Life Cycle: installed. */
-	lcs_selectable		= 0x07,		/* <! Application Life Cycle: selectable. */
-	lcs_personalized	= 0x0F,		/* <! Application Life Cycle: selectable. */
-	lcs_locked			= 0x83,		/* <! Application Life Cycle: locked. */
-} IsdLcs;
+	lcs_installed		= 0x03,		/* <! ISD Life Cycle: installed. */
+	lcs_selectable		= 0x07,		/* <! ISD Life Cycle: selectable. */
+	lcs_personalized	= 0x0F,		/* <! ISD Life Cycle: personalized. */
+	lcs_locked			= 0x83,		/* <! ISD Life Cycle: locked. */
+} SdLcs;
 
 /**
  * GPCS, clause 6.6.1, "Privilege Definition".

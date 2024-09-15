@@ -4,15 +4,15 @@
 #include "apdu.h"
 #include "ws_wraper.h"
 
-static APDU_t* apdu;
-
 int
 main(int argc, char* argv[])
 {
+	APDU* apdu;
 	apdu_init();
-	apdu = apdu_get();
+	apdu = apdu_get_singleton();
+
 #if defined(FUNOS_SIMULATOR)
-	ws_init(apdu);
+	ws_init();
 #endif /* FUNOS_SIMULATOR */
 
 	while (true) {

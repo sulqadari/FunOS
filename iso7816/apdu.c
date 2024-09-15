@@ -4,13 +4,13 @@
 #include "statusWords.h"
 #include "ws_wraper.h"
 
-static APDU_t apdu;
+static APDU apdu;
 
 void
 apdu_receiveCmd(void)
 {
 	switch (apdu.iface) {
-		case iface_websocket: ws_recvCmd(); break;
+		case iface_websocket: ws_recvCmd(&apdu); break;
 		default:
 	}
 }
@@ -28,7 +28,7 @@ void
 apdu_sendData(uint8_t* data, uint32_t length)
 {
 	switch (apdu.iface) {
-		case iface_websocket: ws_sendData(data, length); break;
+		case iface_websocket: ws_sendData(&apdu, data, length); break;
 		default:
 	}
 }
@@ -37,7 +37,7 @@ void
 apdu_sendSW(uint16_t sw)
 {
 	switch (apdu.iface) {
-		case iface_websocket: ws_sendSW(sw); break;
+		case iface_websocket: ws_sendSW(&apdu, sw); break;
 		default:
 	}
 }
@@ -50,7 +50,7 @@ apdu_init(void)
 	apdu.SW		 	= SW_SUCCESS;
 }
 
-APDU_t*
+APDU*
 apdu_get(void)
 {
 	return &apdu;
