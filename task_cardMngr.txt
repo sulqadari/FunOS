@@ -104,10 +104,11 @@
 
 Для справки: описанные службы имплементированы в пакете GlobalPlatform для JavaCard.
 
-
 									Subgoal #2.1.2
 								Command Dispatch (глава 6.3)
 
+
+								
 									Subgoal #2.1.3
 					Logical Channels and Application selection (глава 6.4)
 

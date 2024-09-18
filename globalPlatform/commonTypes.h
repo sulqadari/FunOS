@@ -35,8 +35,7 @@ typedef enum {
 	lcs_locked			= 0x83,		/* <! ISD Life Cycle: locked. */
 } SdLcs;
 
-/**
- * GPCS, clause 6.6.1, "Privilege Definition".
+/* GPCS, clause 6.6.1, "Privilege Definition".
  * The following enumeration defines Security Domain and Application privileges.
  * See clause 11.1.2, "Privileges Coding" for values details. */
 typedef enum {
