@@ -19,6 +19,11 @@
 		"socket.h": "c",
 		"types.h": "c",
 		"inet.h": "c",
-		"apdu_interface.h": "c"
+		"apdu_interface.h": "c",
+		"statuses.h": "c",
+		"isd.h": "c",
+		"commontypes.h": "c",
+		"locale": "c",
+		"string": "c"
 	}
 }

@@ -9,13 +9,13 @@ typedef enum {
 	lcs_secured			= 0x0F,		/* <! Card life cycle: secured. */
 	lcs_locked			= 0x7F,		/* <! Card life cycle: locked. */
 	lcs_terminated		= 0xFF		/* <! Card life cycle: terminated. */
-} CardLcs;
+} cardLcs;
 
 /* clause 5.2, "Executable Load File/ Executable Module Life Cycle".
  * See clause 11.1, "General Coding Rules" for details about assigned values. */
 typedef enum {
 	lcs_loaded			= 0x01		/* <! Executable Load File Life Cycle: loaded. */
-} ElfLcs;
+} elfLcs;
 
 /* clause 5.3.1, "Application Life Cycle States". See clause 11.1, "General Coding Rules"
  * for details about assigned values. */
@@ -24,8 +24,11 @@ typedef enum {
 	lcs_selectable		= 0x07,		/* <! Application Life Cycle: selectable. */
 	lcs_personalized	= 0x0F,		/* <! Application Life Cycle: personalized. */
 	lcs_locked			= 0x83,		/* <! Application Life Cycle: locked. */
-} AppLcs;
+} appLcs;
 
+/* NOTE: Current version doesn't feature the multi-SD implementation. And because the ISD
+ * inherits a life cycle of the Card, the structure below can be commented out. */
+#if(0)
 /* clause 5.3.2, "Security Domain Life Cycle States". See clause 11.1, "General Coding
  * Rules" for details about assigned values. */
 typedef enum {
@@ -33,7 +36,8 @@ typedef enum {
 	lcs_selectable		= 0x07,		/* <! ISD Life Cycle: selectable. */
 	lcs_personalized	= 0x0F,		/* <! ISD Life Cycle: personalized. */
 	lcs_locked			= 0x83,		/* <! ISD Life Cycle: locked. */
-} SdLcs;
+} sdLcs;
+#endif 
 
 /**
  * GPCS, clause 6.6.1, "Privilege Definition".
@@ -60,6 +64,6 @@ typedef enum {
 	privLoadFileEnc	= 0x00400000,	/* <! The SD requires that the Load File being associated to it is to be loaded ciphered (9.1.3.7). */
 	privCLActivate	= 0x00200000,	/* <! An App is capable of [de]activating on the contactless interface (Amd C, clause 7.1). */
 	privCLSelfActiv	= 0x00010000,	/* <! An App is capable of activating itself on the contactless interface without a prior request to the Application with the Contactless Activation privilege (Amd C, clause 7.2). */
-} Privilege;
+} gpPrivilege;
 
 #endif /* FUNOS_GP_COMMON_H */

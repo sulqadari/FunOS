@@ -2,8 +2,8 @@
 #define FUNOS_STATUSES_H
 
 typedef enum {
-	gpSuccess	= 0x00,	/* Success */
-	gpCritErr	= 0xFF	/* Critical error */
-} Status;
+	gpSuccess		= 0x00,	/* Success. */
+	gpCritErr		= 0xFF	/* Critical error. */
+} gpStatus;
 
 #endif /* FUNOS_STATUSES_H */

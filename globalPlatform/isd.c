@@ -1,3 +1,4 @@
+#include <stdlib.h>
 #include "isd.h"
 #include "statuses.h"
 
@@ -24,9 +25,32 @@ static uint8_t* cardCapabilityInfo;
  * See Appendix 'H'.*/
 static uint8_t isdAID[] = { 0xA0, 0x00, 0x00, 0x01, 0x51, 0x00, 0x00, 0x00 };
 
-Status
-isd_getAID(uint8_t** aidPtr)
+ISD isd = {
+	.lcState = lcs_ready,
+	.privilege = 0x00FFFFFF,	/* <! The ISD has the all privileges. */
+	.apps = NULL,
+	.keys = NULL
+};
+
+cardLcs
+isd_getCardLifeCycleState(void)
 {
-	*aidPtr = &isdAID[0];
-	return gpSuccess;
+	return isd.lcState;
+}
+
+appLcs
+isd_getAppLifeCycleState(uint8_t* _aid)
+{
+	uint8_t appIndex;
+	if ((appIndex = isRegistred(_aid)) != gpCritErr) {
+		return isd.apps[appIndex].lcState;
+	}
+
+	return lcs_locked;
+}
+
+uint8_t*
+isd_getAID(void)
+{
+	return &isdAID[0];
 }
