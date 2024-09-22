@@ -39,8 +39,7 @@ typedef enum {
 } sdLcs;
 #endif
 
-/**
- * GPCS, clause 6.6.1, "Privilege Definition".
+/* GPCS, clause 6.6.1, "Privilege Definition".
  * The following enumeration defines Security Domain and Application privileges.
  * See clause 11.1.2, "Privileges Coding" for values details. */
 typedef enum {
