@@ -12,28 +12,24 @@ typedef struct {
 	uint8_t* key;		/* <! The key. */
 } ISDKey;
 
-typedef struct {
-	appLcs		lcState;
-	gpPrivilege	privilege;
-} Application;
-
 /* GPCS, clause 7, "Security Domains".
- * The first application installed on a card and inherits the card life cycle state. */
+ * The first application installed on a card. */
 typedef struct {
-	cardLcs*	 lcState;	/* <! The ISD inherits the Card's Life Cycle State. */
-	gpPrivilege	 privilege;
-	Application* apps;
-	ISDKey*		 keys;
+	cardLcs		lcState;	/* <! The ISD inherits the Card's Life Cycle State. */
+	gpPrivilege	privilege;
+	ISDKey*		key;
 } ISD;
 
-cardLcs isd_getCardLifeCycleState(void);
-appLcs isd_getAppLifeCycleState(uint8_t* _aid);
+cardLcs isd_getLifeCycleState(void);
+gpStatus isd_setLifeCycleState(cardLcs lcs);
 
-gpStatus isd_updatePrivege(gpPrivilege privilege);
+const uint8_t* isd_getAID(void);
+
 gpPrivilege isd_getPrivilege(void);
+gpStatus isd_setPrivilege(gpPrivilege privilege);
+gpStatus isd_resetPrivilege(gpPrivilege privilege);
 
-uint8_t* isd_getAID(void);
-gpStatus isd_getKey(ISDKey** _key, uint8_t _kvn, uint8_t _kid);
+ISDKey* isd_getKey(uint8_t _kvn, uint8_t _kid);
 gpStatus isd_setKey(ISDKey* _key);
 
 #endif /* FUNOS_ISD_H */

@@ -86,7 +86,7 @@ wic_printAnswer(const uint8_t* buffer, uint16_t size)
 	uint16_t sw = ((uint16_t)buffer[size - 2] << 8) | (buffer[size - 1]);
 
 	/* Print SW. */
-	if (sw == SW_NO_ERROR || (sw & 0xFF00) == SW_BYTES_REMAIN)
+	if (sw == SW_SUCCESS || (sw & 0xFF00) == SW_BYTES_REMAIN)
 		printf(GREEN_COLOR "%04X\n", sw);
 	else
 		printf(RED_COLOR "%04X\n", sw);

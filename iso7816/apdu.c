@@ -51,7 +51,7 @@ apdu_init(void)
 }
 
 APDU*
-apdu_get(void)
+apdu_getReference(void)
 {
 	return &apdu;
 }

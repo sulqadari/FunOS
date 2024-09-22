@@ -37,6 +37,6 @@ void apdu_receiveCmd(void);
 void apdu_receiveData(void);
 void apdu_sendData(uint8_t* data, uint32_t length);
 void apdu_sendSW(uint16_t sw);
-APDU* apdu_get(void);
+APDU* apdu_getReference(void);
 
 #endif /* FUNOS_APDU_H */

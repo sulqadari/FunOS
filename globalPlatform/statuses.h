@@ -3,7 +3,8 @@
 
 typedef enum {
 	gpSuccess		= 0x00,	/* Success. */
-	gpCritErr		= 0xFF	/* Critical error. */
+	gpErrCardTerm,
+	gpErrCritical	= 0xFF	/* Critical error. */
 } gpStatus;
 
 #endif /* FUNOS_STATUSES_H */

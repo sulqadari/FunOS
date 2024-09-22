@@ -9,7 +9,7 @@ main(int argc, char* argv[])
 {
 	APDU* apdu;
 	apdu_init();
-	apdu = apdu_get_singleton();
+	apdu = apdu_getReference();
 
 #if defined(FUNOS_SIMULATOR)
 	ws_init();
