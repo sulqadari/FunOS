@@ -21,7 +21,7 @@ typedef struct {
 } ISD;
 
 cardLcs isd_getLifeCycleState(void);
-gpStatus isd_setLifeCycleState(cardLcs lcs);
+gpStatus isd_setLifeCycleState(const cardLcs lcs);
 
 const uint8_t* isd_getAID(void);
 

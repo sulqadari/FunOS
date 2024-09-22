@@ -40,14 +40,39 @@ isd_getLifeCycleState(void)
 	return isd.lcState;
 }
 
+/**
+ * @param cardLcs: a value to be assigned to the CLCS.
+ * @returns gpStatus: gpSuccess, gpErrClsRevert or gpErrCardTerm
+ */
 gpStatus
-isd_setLifeCycleState(cardLcs lcs)
+isd_setLifeCycleState(const cardLcs lcs)
 {
-	if (isd.lcState == cardTerminated)
-		return gpErrCardTerm;
-	
-	isd.lcState = lcs;
-	return gpSuccess;
+	cardLcs clStatus = lcs;
+	gpStatus result;
+
+	do {
+		result = gpErrCardTerm;
+		if (isd.lcState == cardTerminated)
+			break;
+		
+		if (lcs == cardLocked) {
+			if ((isd.lcState & 0xFF00) == cardLocked) {
+				clStatus = isd.lcState & 0x00FF;	/* Unlock if locked. */
+			} else {
+				clStatus = isd.lcState | lcs;		/* Lock if unlocked. */
+			}
+		} else {
+			/* Card life cycle state is irreversible */
+			result = gpErrClsRevert;
+			if (lcs < isd.lcState)
+				break;
+		}
+
+		isd.lcState = clStatus;
+		result = gpSuccess;
+	} while (0);
+
+	return result;
 }
 
 const uint8_t*

@@ -2,20 +2,24 @@
 #define FUNOS_GP_COMMON_H
 
 /* clause 5.1, "Card Life Cycle". See clause 11.1, "General Coding Rules"
- * for details about assigned values. */
+ * for details about assigned values.
+ * Note that the bits of the 'LOCKED' state are shifted left. This is done to make
+ * it possible to return a Card to the previous state. That is, when one locks
+ * the card, we keep its current state in the least significant bits and mask the
+ * most significant bits with 'LOCKED' value. */
 typedef enum {
 	cardReady		= 0x01,		/* <! Card life cycle: ISD is ready to accept APDUs. */
 	cardInitialized	= 0x07,		/* <! Card life cycle: initialized. */
 	cardSecured		= 0x0F,		/* <! Card life cycle: secured. */
-	cardLocked		= 0x7F,		/* <! Card life cycle: locked. */
-	cardTerminated	= 0xFF		/* <! Card life cycle: terminated. */
+	cardLocked		= 0x7F00,	/* <! Card life cycle: locked. */
+	cardTerminated	= 0xFFFF	/* <! Card life cycle: terminated. */
 } cardLcs;
 
 /* clause 5.2, "Executable Load File/ Executable Module Life Cycle".
  * See clause 11.1, "General Coding Rules" for details about assigned values. */
 typedef enum {
 	lcs_loaded			= 0x01		/* <! Executable Load File Life Cycle: loaded. */
-} elfLcs;
+} execLoadLcs;
 
 /* clause 5.3.1, "Application Life Cycle States". See clause 11.1, "General Coding Rules"
  * for details about assigned values. */
@@ -23,7 +27,7 @@ typedef enum {
 	appInstalled	= 0x03,		/* <! Application Life Cycle: installed. */
 	appSelectable	= 0x07,		/* <! Application Life Cycle: selectable. */
 	appPersonalized	= 0x0F,		/* <! Application Life Cycle: personalized. */
-	appLocked		= 0x83,		/* <! Application Life Cycle: locked. */
+	appLocked		= 0x8300,		/* <! Application Life Cycle: locked. */
 } appLcs;
 
 /* NOTE: Current version doesn't feature the multi-SD implementation. And because the ISD
@@ -32,10 +36,10 @@ typedef enum {
 /* clause 5.3.2, "Security Domain Life Cycle States". See clause 11.1, "General Coding
  * Rules" for details about assigned values. */
 typedef enum {
-	sdInstalled		= 0x03,		/* <! ISD Life Cycle: installed. */
-	sdSelectable	= 0x07,		/* <! ISD Life Cycle: selectable. */
-	sdPersonalized	= 0x0F,		/* <! ISD Life Cycle: personalized. */
-	sdLocked		= 0x83,		/* <! ISD Life Cycle: locked. */
+	sdInstalled		= 0x0003,		/* <! ISD Life Cycle: installed. */
+	sdSelectable	= 0x0007,		/* <! ISD Life Cycle: selectable. */
+	sdPersonalized	= 0x000F,		/* <! ISD Life Cycle: personalized. */
+	sdLocked		= 0x0083,		/* <! ISD Life Cycle: locked. */
 } sdLcs;
 #endif
 
