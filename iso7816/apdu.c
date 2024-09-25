@@ -2,7 +2,7 @@
 #include <stdint.h>
 #include "apdu.h"
 #include "statusWords.h"
-#include "ws_wraper.h"
+#include "udp/udp.h"
 
 static APDU apdu;
 
@@ -10,7 +10,7 @@ void
 apdu_receiveCmd(void)
 {
 	switch (apdu.iface) {
-		case iface_websocket: ws_recvCmd(&apdu); break;
+		case iface_websocket: udp_recvCmd(&apdu); break;
 		default:
 	}
 }
@@ -19,7 +19,7 @@ void
 apdu_receiveData(void)
 {
 	switch (apdu.iface) {
-		case iface_websocket: ws_recvData(); break;
+		case iface_websocket: udp_recvData(); break;
 		default:
 	}
 }
@@ -28,7 +28,7 @@ void
 apdu_sendData(uint8_t* data, uint32_t length)
 {
 	switch (apdu.iface) {
-		case iface_websocket: ws_sendData(&apdu, data, length); break;
+		case iface_websocket: udp_sendData(&apdu, data, length); break;
 		default:
 	}
 }
@@ -37,7 +37,7 @@ void
 apdu_sendSW(uint16_t sw)
 {
 	switch (apdu.iface) {
-		case iface_websocket: ws_sendSW(&apdu, sw); break;
+		case iface_websocket: udp_sendSW(&apdu, sw); break;
 		default:
 	}
 }

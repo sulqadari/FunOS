@@ -2,7 +2,7 @@
 #include <stdint.h>
 #include <stdbool.h>
 #include "apdu.h"
-#include "ws_wraper.h"
+#include "udp/udp.h"
 
 int
 main(int argc, char* argv[])
@@ -12,7 +12,7 @@ main(int argc, char* argv[])
 	apdu = apdu_getReference();
 
 #if defined(FUNOS_SIMULATOR)
-	ws_init();
+	udp_init();
 #endif /* FUNOS_SIMULATOR */
 
 	while (true) {

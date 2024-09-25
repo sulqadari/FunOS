@@ -1,5 +1,5 @@
 #include <stdint.h>
-#include "wic_utils.h"
+#include "cmdParser.h"
 #include "statusWords.h"
 #include "apdu.h"
 
@@ -21,7 +21,7 @@ static const command_t cmds[] = {
 };
 
 void
-wic_printCommand(const uint8_t* buffer, uint16_t size)
+utils_printCommand(const uint8_t* buffer, uint16_t size)
 {
 	int j, cmdArrayLen = sizeof(cmds) / sizeof(command_t);
 	
@@ -71,7 +71,7 @@ wic_printCommand(const uint8_t* buffer, uint16_t size)
 }
 
 void
-wic_printAnswer(const uint8_t* buffer, uint16_t size)
+utils_printAnswer(const uint8_t* buffer, uint16_t size)
 {
 	printf(">> ");
 
@@ -96,7 +96,7 @@ wic_printAnswer(const uint8_t* buffer, uint16_t size)
 }
 
 void
-wic_printAtr(const uint8_t* atr, uint16_t size)
+utils_printAtr(const uint8_t* atr, uint16_t size)
 {
 	printf(GREEN_COLOR "\nATR: ");
 

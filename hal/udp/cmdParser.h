@@ -12,8 +12,8 @@
 #define SKY_BLUE_COLOR	"\033[0;36m"
 #define DEFAULT_COLOR	"\033[0m"
 
-void wic_printCommand(const uint8_t* buffer, uint16_t size);
-void wic_printAnswer(const uint8_t* buffer, uint16_t size);
-void wic_printAtr(const uint8_t* buffer, uint16_t size);
+void utils_printCommand(const uint8_t* buffer, uint16_t size);
+void utils_printAnswer(const uint8_t* buffer, uint16_t size);
+void utils_printAtr(const uint8_t* buffer, uint16_t size);
 
 #endif // !WIC_UTILS_H

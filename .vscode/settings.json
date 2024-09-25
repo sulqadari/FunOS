@@ -1,10 +1,10 @@
 {
 	"files.associations": {
+		"*.jcsh": "shellscript",
 		"*.fn": "java",
 		"00_Preface": "markdown",
 		"*.tivm": "javascript",
 		"*.txt": "cmake",
-		"*.jcsh": "shellscript",
 		"random": "c",
 		"stdint.h": "c",
 		"cstdlib": "c",
@@ -24,6 +24,7 @@
 		"isd.h": "c",
 		"commontypes.h": "c",
 		"locale": "c",
-		"string": "c"
+		"string": "c",
+		"udp.h": "c"
 	}
 }

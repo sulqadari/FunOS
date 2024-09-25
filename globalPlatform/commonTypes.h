@@ -11,8 +11,8 @@ typedef enum {
 	cardReady		= 0x01,		/* <! Card life cycle: ISD is ready to accept APDUs. */
 	cardInitialized	= 0x07,		/* <! Card life cycle: initialized. */
 	cardSecured		= 0x0F,		/* <! Card life cycle: secured. */
-	cardLocked		= 0x7F00,	/* <! Card life cycle: locked. */
-	cardTerminated	= 0xFFFF	/* <! Card life cycle: terminated. */
+	cardLocked		= 0x7F,	/* <! Card life cycle: locked. */
+	cardTerminated	= 0xFF	/* <! Card life cycle: terminated. */
 } cardLcs;
 
 /* clause 5.2, "Executable Load File/ Executable Module Life Cycle".
@@ -27,7 +27,7 @@ typedef enum {
 	appInstalled	= 0x03,		/* <! Application Life Cycle: installed. */
 	appSelectable	= 0x07,		/* <! Application Life Cycle: selectable. */
 	appPersonalized	= 0x0F,		/* <! Application Life Cycle: personalized. */
-	appLocked		= 0x8300,		/* <! Application Life Cycle: locked. */
+	appLocked		= 0x83,		/* <! Application Life Cycle: locked. */
 } appLcs;
 
 /* NOTE: Current version doesn't feature the multi-SD implementation. And because the ISD

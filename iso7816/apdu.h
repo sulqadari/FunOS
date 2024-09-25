@@ -19,6 +19,7 @@ typedef enum {
 
 typedef struct APDU {
 	uint16_t sendLength;			/* The length of the data to be sent. */
+	uint16_t recvLength;
 	Interface iface;				/* Interface. */
 	uint16_t SW;					/* Status Word. */
 	uint8_t buffer[APDU_COMMAD_LENGTH + APDU_DATA_LENGTH];
