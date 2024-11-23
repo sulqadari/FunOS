@@ -3,14 +3,11 @@
         {
             "name": "FunOS",
             "includePath": [
-                "${workspaceFolder}/hal/webSocket",
-				"${workspaceFolder}/hal/webSocket/include",
 				"${workspaceFolder}/globalPlatform",
-				"${workspaceFolder}/iso7816"
-            ],
-            "defines": [
-				"FUNOS_SIMULATOR"
+				"${workspaceFolder}/iso7816",
+				"${workspaceFolder}/hal"
 			],
+            "defines": [ ],
             "compilerPath": "/usr/bin/gcc",
             "cStandard": "c17",
             "cppStandard": "gnu++17",

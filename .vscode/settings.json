@@ -4,26 +4,8 @@
 		"00_Preface": "markdown",
 		"*.tivm": "javascript",
 		"*.txt": "cmake",
-		"*.jcsh": "shellscript",
-		"random": "c",
-		"stdint.h": "c",
-		"cstdlib": "c",
-		"stdbool.h": "c",
-		"wic.h": "c",
-		"transport.h": "c",
-		"wic_utils.h": "c",
-		"apdu.h": "c",
-		"ws_wraper.h": "c",
+		"udp_handler.h": "c",
 		"statuswords.h": "c",
-		"wic_transport.h": "c",
-		"socket.h": "c",
-		"types.h": "c",
-		"inet.h": "c",
-		"apdu_interface.h": "c",
-		"statuses.h": "c",
-		"isd.h": "c",
-		"commontypes.h": "c",
-		"locale": "c",
-		"string": "c"
+		"apdu.h": "c"
 	}
 }
