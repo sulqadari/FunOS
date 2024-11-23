@@ -11,7 +11,7 @@ main(int argc, char* argv[])
 {
 	APDU* apdu = apdu_init(iface_udp);
 	uint8_t* cmd = &apdu->buffer[OFF_CLA];
-	uint8_t data = &apdu->buffer[OFF_DATA];
+	// uint8_t* data = &apdu->buffer[OFF_DATA];
 	
 	while (true)
 	{

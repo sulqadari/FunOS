@@ -59,9 +59,9 @@ udp_printCommand(const uint8_t* buffer, uint16_t size)
 	/* Iterate through the list of known commands and display (if any). */
 	for (j = 0; j < cmdArrayLen; j++) {
 
-		uint8_t cla = buffer[APDU_OFFSET_CLA];
-		uint8_t ins = buffer[APDU_OFFSET_INS];
-		uint8_t p1 = buffer[APDU_OFFSET_P1];
+		uint8_t cla = buffer[OFF_CLA];
+		uint8_t ins = buffer[OFF_INS];
+		uint8_t p1 = buffer[OFF_P1];
 		
 		if ((cmds[j].cla == cla) && (cmds[j].ins == ins) && (cmds[j].p1 == p1)) {
 			printf("%s\n", cmds[j].descr);
@@ -80,18 +80,18 @@ udp_printCommand(const uint8_t* buffer, uint16_t size)
 	
 	/* Print Lc */
 	if (size >= APDU_COMMAD_LENGTH) {
-		printf(PINK_COLOR " %02X ", buffer[APDU_OFFSET_P3]);
+		printf(PINK_COLOR " %02X ", buffer[OFF_P3]);
 	}
 
 	if (size > APDU_COMMAD_LENGTH) {
 		/* Print CDATA */
-		for (int i = 0; i < buffer[APDU_OFFSET_P3]; ++i) {
+		for (int i = 0; i < buffer[OFF_P3]; ++i) {
 			printf(YELLOW_COLOR "%02X", (uint8_t)buffer[i]);
 		}
 
-		if (size - APDU_COMMAD_LENGTH != buffer[APDU_OFFSET_P3]) {
+		if (size - APDU_COMMAD_LENGTH != buffer[OFF_P3]) {
 			printf(" ");
-			for (int i = APDU_COMMAD_LENGTH + buffer[APDU_OFFSET_P3]; i < size; ++i) {
+			for (int i = APDU_COMMAD_LENGTH + buffer[OFF_P3]; i < size; ++i) {
 				printf(SKY_BLUE_COLOR "%02X", (uint8_t)buffer[i - 5]);
 			}
 		}
@@ -126,6 +126,7 @@ udp_printAnswer(const uint8_t* buffer, uint16_t size)
 	fflush(stdout);
 }
 
+#if (0)
 static void
 udp_printAtr(const uint8_t* atr, uint16_t size)
 {
@@ -137,6 +138,7 @@ udp_printAtr(const uint8_t* atr, uint16_t size)
 	printf(DEFAULT_COLOR "\n");
 	fflush(stdout);
 }
+#endif
 
 void
 udp_init(void* a)
