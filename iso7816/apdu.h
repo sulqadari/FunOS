@@ -13,15 +13,9 @@
 #define OFF_P3		4
 #define OFF_DATA	5
 
-typedef enum {
-	iface_udp,
-	iface_usart
-} Interface;
-
 typedef struct {
 	uint16_t recvLen;		/* Number of received length. */
 	uint16_t sendLen;		/* The length of the data to be sent. */
-	Interface iface;		/* Interface. */
 	uint16_t SW;			/* Status Word. */
 	uint8_t buffer[APDU_COMMAD_LENGTH + APDU_DATA_LENGTH];
 } APDU;
@@ -34,7 +28,7 @@ static const uint8_t ATR[] = {
 	0x44, 0x41, 0x30, 0x30, 0x35, 0x31, 0x00, 0xE4
 };
 
-APDU* apdu_init(const Interface iface);
+APDU* apdu_init(void);
 void apdu_receiveCmd(void);
 void apdu_receiveData(void);
 void apdu_sendData(uint8_t* data, uint32_t length);

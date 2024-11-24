@@ -5,7 +5,8 @@
             "includePath": [
 				"${workspaceFolder}/globalPlatform",
 				"${workspaceFolder}/iso7816",
-				"${workspaceFolder}/hal"
+				"${workspaceFolder}/hal",
+				"${workspaceFolder}/memngr"
 			],
             "defines": [ ],
             "compilerPath": "/usr/bin/gcc",

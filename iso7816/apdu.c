@@ -1,7 +1,7 @@
 #include <stdbool.h>
 #include <stdint.h>
-#include "apdu.h"
 #include "statusWords.h"
+#include "apdu.h"
 #include "udp/udp_handler.h"
 
 static APDU apdu;
@@ -9,49 +9,35 @@ static APDU apdu;
 void
 apdu_receiveCmd(void)
 {
-	switch (apdu.iface) {
-		case iface_udp: udp_recvCmd(); break;
-		default: break;
-	}
+	udp_recvCmd();
 }
 
 void
 apdu_receiveData(void)
 {
-	switch (apdu.iface) {
-		case iface_udp: udp_recvData(); break;
-		default: break;
-	}
+	udp_recvData();
 }
 
 void
 apdu_sendData(uint8_t* data, uint32_t length)
 {
-	switch (apdu.iface) {
-		case iface_udp: udp_sendData(data, length); break;
-		default: break;
-	}
+	udp_sendData(data, length);
 }
 
 void
 apdu_sendSW(uint16_t sw)
 {
-	switch (apdu.iface) {
-		case iface_udp: udp_sendSW(sw); break;
-		default: break;
-	}
+	udp_sendSW(sw);
 }
 
 APDU*
-apdu_init(const Interface iface)
+apdu_init(void)
 {
 	apdu.recvLen	= 0;
 	apdu.sendLen	= 0;
-	apdu.iface		= iface;
 	apdu.SW		 	= SW_SUCCESS;
 
-	if (iface == iface_udp)
-		udp_init(&apdu);
+	udp_init(&apdu);
 	
 	return &apdu;
 }

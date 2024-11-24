@@ -1,6 +1,3 @@
-#include "statusWords.h"
-#include "apdu.h"
-
 #include <stdio.h>
 #include <stdint.h>
 #include <stdbool.h>
@@ -13,6 +10,9 @@
 #include <arpa/inet.h>
 #include <netdb.h>
 #include <errno.h>
+
+#include "statusWords.h"
+#include "apdu.h"
 
 #define RED_COLOR		"\033[0;31m"
 #define GREEN_COLOR		"\033[0;32m"

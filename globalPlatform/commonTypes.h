@@ -11,8 +11,8 @@ typedef enum {
 	cardReady		= 0x01,		/* <! Card life cycle: ISD is ready to accept APDUs. */
 	cardInitialized	= 0x07,		/* <! Card life cycle: initialized. */
 	cardSecured		= 0x0F,		/* <! Card life cycle: secured. */
-	cardLocked		= 0x7F00,	/* <! Card life cycle: locked. */
-	cardTerminated	= 0xFFFF	/* <! Card life cycle: terminated. */
+	cardLocked		= 0x7F,		/* <! Card life cycle: locked. */
+	cardTerminated	= 0xFF		/* <! Card life cycle: terminated. */
 } cardLcs;
 
 /* clause 5.2, "Executable Load File/ Executable Module Life Cycle".

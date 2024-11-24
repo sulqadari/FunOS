@@ -8,9 +8,11 @@ if(FUNOS_SIMULATOR)
 	target_include_directories(${ENTRY_POINT}
 		PRIVATE ${CMAKE_CURRENT_SOURCE_DIR}/udp
 		PRIVATE ${PROJECT_SOURCE_DIR}/iso7816
+		PRIVATE ${PROJECT_SOURCE_DIR}/memngr
 	)
 
 	target_link_libraries(${ENTRY_POINT}
 		${ISO7816}
+		${MEMNGER}
 	)
 endif()
