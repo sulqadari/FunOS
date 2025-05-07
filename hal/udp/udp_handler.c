@@ -11,7 +11,7 @@
 #include <netdb.h>
 #include <errno.h>
 
-#include "statusWords.h"
+#include "ISO7816sw.h"
 #include "apdu.h"
 
 #define RED_COLOR		"\033[0;31m"

@@ -5,7 +5,6 @@
 		"*.tivm": "javascript",
 		"*.txt": "cmake",
 		"udp_handler.h": "c",
-		"statuswords.h": "c",
 		"apdu.h": "c"
 	}
 }
