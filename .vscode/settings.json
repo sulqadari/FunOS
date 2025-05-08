@@ -1,5 +1,6 @@
 {
 	"files.associations": {
+		"*.jcsh": "shellscript",
 		"*.fn": "java",
 		"00_Preface": "markdown",
 		"*.tivm": "javascript",

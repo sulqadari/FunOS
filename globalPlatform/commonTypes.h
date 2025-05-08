@@ -27,7 +27,7 @@ typedef enum {
 	appInstalled	= 0x03,		/* <! Application Life Cycle: installed. */
 	appSelectable	= 0x07,		/* <! Application Life Cycle: selectable. */
 	appPersonalized	= 0x0F,		/* <! Application Life Cycle: personalized. */
-	appLocked		= 0x8300,		/* <! Application Life Cycle: locked. */
+	appLocked		= 0x83,		/* <! Application Life Cycle: locked. */
 } appLcs;
 
 /* NOTE: Current version doesn't feature the multi-SD implementation. And because the ISD

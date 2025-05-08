@@ -9,5 +9,5 @@ target_include_directories(${ISO7816}
 )
 
 target_link_libraries(${ISO7816}
-	PRIVATE ${WEBSOCKET}
+	PRIVATE ${UDP_CONNECTION}
 )
